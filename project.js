@@ -5,17 +5,13 @@ const urlElement = document.querySelector("#url");
 const cardbody = document.querySelectorAll(".card-body")[1];
 const clear = document.getElementById("clear-films");
 
-const ui = new UI();
-
-const storage = new Storage();
-
 eventListeners();
 
 function eventListeners() {
     form.addEventListener("submit", addFilm);
     document.addEventListener("DOMContentLoaded", function () {
-        let films = storage.getFilmsFromStorage();
-        ui.loadAllFilms(films);
+        let films = Storage.getFilmsFromStorage();
+        UI.loadAllFilms(films);
     });
     cardbody.addEventListener("click", deleteFilm);
     clear.addEventListener("click", clearAllFilms);
@@ -28,33 +24,33 @@ function addFilm(e) {
 
     if (title === "" || director === "" || url === "") {
 
-        ui.displayMessages("Fill All Fields...", "danger");
+        UI.displayMessages("Fill All Fields...", "danger");
     }
     else {
         const newFilm = new Film(title, director, url);
 
 
-        ui.addFilmToUI(newFilm);
-        storage.addFilmToStorage(newFilm);
-        ui.displayMessages("The movie has been successfully added...", "success");
+        UI.addFilmToUI(newFilm);
+        Storage.addFilmToStorage(newFilm);
+        UI.displayMessages("The movie has been successfully added...", "success");
     }
-    ui.clearInputs(titleElement, directorElement, urlElement);
+    UI.clearInputs(titleElement, directorElement, urlElement);
 }
 
 function deleteFilm(e) {
 
     if (e.target.id === "delete-film") {
-        ui.deleteFilmFromUI(e.target);
-        storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
-        ui.displayMessages("Deletion successful...", "success");
+        UI.deleteFilmFromUI(e.target);
+        Storage.deleteFilmFromStorage(e.target.parentElement.previousElementSibling.previousElementSibling.textContent);
+        UI.displayMessages("Deletion successful...", "success");
     }
 }
 
 function clearAllFilms() {
     if (confirm("Are you sure?")) {
-        ui.clearAllFilmsFromUI();
-        storage.clearAllFilmsFromStorage();
-        ui.displayMessages("All movies has been successfully removed...", "success");
+        UI.clearAllFilmsFromUI();
+        Storage.clearAllFilmsFromStorage();
+        UI.displayMessages("All movies has been successfully removed...", "success");
     }
 
 }
