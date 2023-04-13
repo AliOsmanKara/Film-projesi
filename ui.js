@@ -53,3 +53,7 @@ UI.prototype.loadAllFilms = function (films) {
 `
     });
 }
+
+UI.prototype.deleteFilmFromUI = function (element) {
+    element.closest("tr").remove();
+}
